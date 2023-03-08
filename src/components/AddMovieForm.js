@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { addMovie } from './../actions/movieActions';
 import { connect } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
 const AddMovieForm = (props) => {
     const { push } = useHistory();
-
+    const dispatch = useDispatch();
     const [movie, setMovie] = useState({
+        id:Date.now(),
         title: "",
         director: "",
         genre: "",
@@ -23,6 +24,9 @@ const AddMovieForm = (props) => {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(addMovie(movie));
+        push("/movies")
     }
 
     const { title, director, genre, metascore, description } = movie;
@@ -36,7 +40,7 @@ const AddMovieForm = (props) => {
 
                     <div className="modal-body">					
                         <div className="form-group">
-                            <label>Title</label>
+                        <label>Title</label>
                             <input value={title} onChange={handleChange} name="title" type="text" className="form-control"/>
                         </div>
                         <div className="form-group">

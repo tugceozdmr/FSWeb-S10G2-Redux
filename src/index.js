@@ -9,9 +9,15 @@ import App from './components/App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 
+const depo = createStore(reducer)
+
+
+
 ReactDOM.render(
+  <Provider store={depo}>
   <Router>
       <App />
-  </Router>,
+  </Router>
+  </Provider>,
   document.getElementById('root')
 );
